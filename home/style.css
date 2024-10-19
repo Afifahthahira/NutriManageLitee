@@ -1,0 +1,140 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, rgb(172, 230, 172), rgb(112, 183, 161));
+}
+
+
+.btn-primary {
+    text-align: center; 
+    width: 150px; 
+    margin: 0 auto;
+    background-color: #007bff; /* Warna latar belakang tombol */
+    color: white; /* Warna teks tombol */
+    padding: 10px 20px; /* Sesuaikan padding tombol */
+    display: block; /* Membuat tombol mengambil lebar maksimum yang tersedia */
+    border: none; /* Menghilangkan border */
+    border-radius: 5px; /* Memberikan sedikit border radius */
+}
+nav .left img {
+    width: 90px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #f8f8f8;
+}
+
+nav .right a {
+    text-decoration: none;
+    color: black;
+}
+
+.slides {
+    max-width: 800px;
+    margin: 20px auto;
+    position: relative;
+}
+
+.slide {
+    display: none;
+}
+
+.slides .slide img {
+    width: 100%;
+    height: auto;
+}
+
+.slides .navigation {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.slides .navigation .prev,
+.slides .navigation .next {
+    cursor: pointer;
+    padding: 16px;
+    font-weight: bold;
+    font-size: 20px;
+    color: wheat;
+    background: rgba(0, 0, 0, 0.2);
+    user-select: none;
+    transition: 0.6s ease;
+}
+
+.slides .navigation .prev:hover,
+.slides .navigation .next:hover {
+    background: rgba(0, 0, 0, 1);
+}
+
+@keyframes fade {
+    from {
+        opacity: 0.3;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 992px) {
+    .slides .navigation .prev,
+    .slides .navigation .next {
+        font-size: 18px;
+        padding: 13px;
+    }
+}
+
+@media (max-width: 768px) {
+    .slides .navigation .prev,
+    .slides .navigation .next {
+        font-size: 15px;
+        padding: 10px;
+    }
+
+    .card-title {
+        font-size: 1.3rem; 
+    }
+}
+
+@media (max-width: 576px) {
+    .slides .navigation .prev,
+    .slides .navigation .next {
+        font-size: 12px;
+        padding: 7px;
+    }
+
+    .card-title {
+        font-size: 1.1rem; 
+    }
+}
+
+@media (max-width: 360px) {
+    .slides .navigation .prev,
+    .slides .navigation .next {
+        font-size: 11px;
+        padding: 6px;
+    }
+
+    .card-title {
+        font-size: 1rem; 
+    }
+}
+
+.card-title {
+    font-size: 1.5rem; 
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    padding: 10px 0; 
+}

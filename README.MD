@@ -18,4 +18,4 @@ Sebuah aplikasi yang dapat melakukan perhitungan dan pencatatan persedian stok p
   - Laporan pengambilan
   - Laporan pembayaran
   - Laporan stok produk
-  - Laporan produk masuk dan keluar
+  - Laporan produk masuk dan keluar"# NutriManageLite" 

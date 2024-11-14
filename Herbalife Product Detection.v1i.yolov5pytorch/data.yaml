@@ -1,0 +1,13 @@
+train: C:/laragon/NutriManageLite/Herbalife Product Detection.v1i.yolov5pytorch/images/train
+val: C:/laragon/NutriManageLite/Herbalife Product Detection.v1i.yolov5pytorch/images/val
+test: ../test/images
+
+nc: 1
+names: ['Green-Tea']
+
+roboflow:
+  workspace: pcd-ryxhq
+  project: herbalife-product-detection
+  version: 1
+  license: Public Domain
+  url: https://universe.roboflow.com/pcd-ryxhq/herbalife-product-detection/dataset/1

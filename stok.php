@@ -5,6 +5,7 @@ require 'cek.php';
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -15,18 +16,25 @@ require 'cek.php';
     <link href="css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
+    <!-- Tambahkan script jQuery untuk memanggil API Flask -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+
     <style>
         .zoomable {
             width: 100px;
         }
+
         .zoomable:hover {
             transform: scale(2.5);
             transition: 0.3s ease;
         }
+
         a {
             text-decoration: black;
             color: black;
         }
+
         #interactive {
             width: 100%;
             height: 300px;
@@ -34,6 +42,7 @@ require 'cek.php';
         }
     </style>
 </head>
+
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <a class="navbar-brand ps-3" href="index.php">NutriManageLite</a>
@@ -60,7 +69,11 @@ require 'cek.php';
                         <div class="card-header">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalAddProduk">Add Product</button>
                             <a href="export.php" class="btn btn-info">Export Data</a>
+                            <!-- <button type="button" class="btn btn-success mr-2" onclick="startScanner()">Scan Barcode</button> -->
+                            <!-- <a href="/detect" class="btn btn-success mr-2">Scan Barcode</a> -->
+                            <button id="scanJumlahProduk" class="btn btn-success"> <i class="fas fa-camera"></i></button>
                         </div>
+
 
                         <div class="card-body">
                             <?php
@@ -178,8 +191,8 @@ require 'cek.php';
                     <div class="modal-body">
                         <input type="file" name="file" class="form-control" required>
                         <br>
-                        <input type="text" id="barcode" name="barcode" placeholder="Barcode" class="form-control" required readonly>
-                        <br>
+                        <!-- <input type="text" id="barcode" name="barcode" placeholder="Barcode" class="form-control" required readonly>
+                        <br> -->
                         <input type="text" id="namaproduk" name="namaproduk" placeholder="Nama produk" class="form-control" required>
                         <br>
                         <input type="text" name="deskripsi" placeholder="Deskripsi" class="form-control" required>
@@ -187,7 +200,8 @@ require 'cek.php';
                         <input type="number" name="stok" placeholder="Stok" class="form-control" required>
                         <br>
                         <div class="d-flex justify-content-between">
-                            <button type="button" class="btn btn-success mr-2" onclick="startScanner()">Scan Barcode</button>
+                            <!-- <button type="button" class="btn btn-success mr-2" onclick="startScanner()">Scan Barcode</button>
+                            <a href="/detect" class="btn btn-success mr-2">Scan Barcode</a>-->
                             <button type="submit" class="btn btn-primary" name="addnewproduk">Submit</button>
                         </div>
                         <div id="interactive" class="viewport" style="display:none;"></div>
@@ -200,7 +214,26 @@ require 'cek.php';
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#scanJumlahProduk').click(function() {
+                // Panggil API Flask untuk mendeteksi jumlah produk
+                $.ajax({
+                    url: 'http://127.0.0.1:5000/detect', // Endpoint API Flask
+                    type: 'GET', // Gunakan GET jika API Flask mengembalikan jumlah produk melalui request GET
+                    success: function(response) {
+                        alert('Jumlah produk yang terdeteksi: ' + response.jumlah_produk);
+                    },
+                    error: function() {
+                        alert('Gagal memindai jumlah produk. Coba lagi nanti.');
+                    }
+                });
+            });
+        });
+    </script>
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/scripts.js"></script>
     <script>
@@ -227,6 +260,25 @@ require 'cek.php';
                 }
                 Quagga.start();
             });
+            // tes
+            // $(document).ready(function() {
+            //     $('#scanJumlahProduk').click(function() {
+            //         $.ajax({
+            //             url: 'http://localhost:5000/detect', // URL endpoint API Flask
+            //             type: 'POST',
+            //             success: function(response) {
+            //                 if (response.success) {
+            //                     alert('Deteksi berhasil:\n' + response.output);
+            //                 } else {
+            //                     alert('Error saat menjalankan deteksi: ' + response.error);
+            //                 }
+            //             },
+            //             error: function() {
+            //                 alert('Gagal terhubung ke server deteksi.');
+            //             }
+            //         });
+            //     });
+            // });
 
             Quagga.onDetected((result) => {
                 const code = result.codeResult.code;
@@ -255,4 +307,5 @@ require 'cek.php';
         });
     </script>
 </body>
+
 </html>
